@@ -3,26 +3,32 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        int port = 1234;
+        boolean run = true;
+        //  ServerSocket serverSocket;
+        //  Socket socket;
         try {
-            ServerSocket ss = new ServerSocket(1201);
-            Socket s = ss.accept();
-            DataInputStream din = new DataInputStream(s.getInputStream());
-            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            ServerSocket serverSocket = new ServerSocket(port);
+                Socket socket = serverSocket.accept();
 
-            String msgin = "", msgout = "";
-            while (!msgin.equals("end")) {
-                msgin = din.readUTF();
-                System.out.println(msgin);
-                msgout = br.readLine();
-                dout.writeUTF(msgout);
-                dout.flush();
+                DataInputStream din = new DataInputStream(socket.getInputStream());
+                DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            String msgin = "solomon säger"+"", msgout = "solomon svarar"+ "";
+                while (!msgin.equals("end")) {
+                    msgin = din.readUTF();
+                    System.out.println("klienten säger: " + msgin);
+                    msgout = br.readLine();
+                    dout.writeUTF(msgout);
+                    dout.flush();
+                }
+                socket.close();
+
+            } catch(Exception e){
+                e.printStackTrace();
             }
-            s.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-}
+

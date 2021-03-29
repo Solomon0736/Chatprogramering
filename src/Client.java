@@ -5,18 +5,23 @@ import java.net.Socket;
 public class Client {
     public static void main(String[] args)  {
        try {
-           Socket s = new Socket("192.168.197.1",1201);
-           DataInputStream din = new DataInputStream(s.getInputStream());
-           DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+           String ip = (String) JOptionPane.showInputDialog(null,"IP?","Connect to..",JOptionPane.QUESTION_MESSAGE);
+           int port = Integer.parseInt(JOptionPane.showInputDialog(null,"Port?","Connect to..",JOptionPane.QUESTION_MESSAGE));
+         // Socket socket = null;
+           Socket socket = new Socket(ip,port);
+
+           DataInputStream din = new DataInputStream(socket.getInputStream());
+           DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 
            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-           String msgin = "", msgout = "";
+           String msgin = "solomon säger"+ "", msgout = "solomon svarar" +"";
 
            while (!msgin.equals("end")) {
-               msgin = din.readUTF();
-               System.out.println(msgin);
-               msgout = br.readLine();
-               dout.writeUTF(msgout);
+               msgout = din.readUTF();
+               System.out.println("solomon säger"+ msgout);
+
+               msgin = br.readLine();
+               dout.writeUTF("solomon säger"+msgin);
            }
 
        } catch (Exception e) {
