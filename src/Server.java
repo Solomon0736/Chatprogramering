@@ -6,7 +6,7 @@ public class Server {
     public static void main(String[] args) {
         int port = 1234;
         boolean run = true;
-        //  ServerSocket serverSocket;
+        //ServerSocket serverSocket;
         //  Socket socket;
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -16,10 +16,10 @@ public class Server {
                 DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-            String msgin = "solomon säger"+"", msgout = "solomon svarar"+ "";
+            String msgin = "", msgout = "";
                 while (!msgin.equals("end")) {
                     msgin = din.readUTF();
-                    System.out.println("klienten säger: " + msgin);
+                    System.out.println("Client säger: " + msgin);
                     msgout = br.readLine();
                     dout.writeUTF(msgout);
                     dout.flush();

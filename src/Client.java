@@ -14,14 +14,14 @@ public class Client {
            DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 
            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-           String msgin = "solomon säger"+ "", msgout = "solomon svarar" +"";
+           String msgin = "", msgout = "solomon svarar" +"";
 
            while (!msgin.equals("end")) {
-               msgout = din.readUTF();
-               System.out.println("solomon säger"+ msgout);
 
                msgin = br.readLine();
-               dout.writeUTF("solomon säger"+msgin);
+               dout.writeUTF(msgin);
+               msgout = din.readUTF();
+               System.out.println("Server säger: " + msgout);
            }
 
        } catch (Exception e) {
